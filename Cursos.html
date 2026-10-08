@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Interesse - Cursos de Informática 2027</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #003399;
+            --primary-dark: #001f5c;
+            --accent: #cc0000;
+            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .main-wrapper {
+            max-width: 500px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 51, 153, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border-top: 6px solid var(--primary);
+            position: relative;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-content {
+            padding: 30px 30px 20px 30px;
+            text-align: center;
+            background: #ffffff;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .logo-container {
+            display: inline-flex;
+            padding: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 6px 16px rgba(0, 51, 153, 0.1);
+            border: 2px solid #e2e8f0;
+            margin-bottom: 12px;
+        }
+
+        .logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .escola-nome {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        h1 {
+            color: var(--primary-dark);
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .form-body {
+            padding: 25px 30px 35px 30px;
+        }
+
+        .projeto-banner {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            color: var(--primary);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cursos-secao {
+            margin-bottom: 22px;
+        }
+
+        .cursos-titulo {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+
+        .curso-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.25s ease;
+        }
+
+        .curso-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+            transform: translateY(-1px);
+        }
+
+        .curso-icon {
+            font-size: 20px;
+            background: #ffffff;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            flex-shrink: 0;
+        }
+
+        .curso-info h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 2px 0;
+        }
+
+        .curso-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 12.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.08);
+        }
+
+        .row-inputs {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row-inputs .input-group {
+            flex: 1;
+        }
+
+        button.btn-enviar {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 16px rgba(204, 0, 0, 0.2);
+            margin-top: 6px;
+        }
+
+        button.btn-enviar:hover {
+            background: #a30000;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.3);
+        }
+
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 35px 25px;
+            animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .success-icon-box {
+            width: 70px;
+            height: 70px;
+            background: #d1fae5;
+            color: #059669;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            margin: 0 auto 16px auto;
+            box-shadow: 0 8px 16px rgba(5, 150, 105, 0.12);
+        }
+
+        .success-screen h2 {
+            color: var(--primary-dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .success-screen p {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .btn-voltar {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <div class="header-content" id="headerForm">
+            <div class="logo-container">
+                <!-- A imagem oficial da escola -->
+                <img src="Diva.png" alt="Logo Escola Diva Costa Fachin" class="logo">
+            </div>
+            <div class="escola-nome">Colégio Estadual Diva Costa Fachin</div>
+            <h1>Cursos de Informática Noturnos</h1>
+        </div>
+
+        <div class="form-body" id="areaFormulario">
+            
+            <div class="projeto-banner">
+                🎯 Pesquisa de Interesse — Projeto Comunidade 2027
+            </div>
+
+            <div class="cursos-secao">
+                <div class="cursos-titulo">Cursos Disponíveis à Noite:</div>
+                
+                <div class="curso-card">
+                    <div class="curso-icon">👵</div>
+                    <div class="curso-info">
+                        <h3>Informática para 3º Idade</h3>
+                        <p>Inclusão digital com foco em autonomia e facilidade.</p>
+                    </div>
+                </div>
+
+                <div class="curso-card">
+                    <div class="curso-icon">💼</div>
+                    <div class="curso-info">
+                        <h3>Informática Básica para Comunidade: ênfase no mundo do trabalho</h3>
+                        <p>Ênfase prática voltada para o mercado profissional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="inscricaoForm" method="POST" target="hidden_iframe">
+                <div class="input-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="row-inputs">
+                    <div class="input-group">
+                        <label for="telefone">WhatsApp</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="idade">Sua Idade</label>
+                        <input type="number" id="idade" name="idade" placeholder="Ex: 62" required min="10" max="120">
+                    </div>
+                </div>
+
+                <button type="submit" id="btnEnviar" class="btn-enviar">Registrar Meu Interesse</button>
+            </form>
+            
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        </div>
+
+        <div class="success-screen" id="mensagemSucesso">
+            <div class="success-icon-box">✓</div>
+            <h2>Interesse Registrado com Sucesso!</h2>
+            <p>
+                Muito obrigado por participar da nossa pesquisa para o <b>Projeto Comunidade 2027</b>! 
+                <br><br>
+                Seus dados foram salvos de forma organizada em nosso sistema. Em breve, a escola entrará em contato via WhatsApp para informar sobre as turmas do próximo ano.
+            </p>
+            <button class="btn-voltar" onclick="resetarFormulario()">Cadastrar Outra Pessoa</button>
+        </div>
+
+    </div>
+
+    <script>
+        // COLE O SEU LINK DO APPS SCRIPT AQUI ENTRE AS ASPAS:
+        const URL_DO_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxQBHmrV2P_jBwji_AAVrNs12dm_TXh-SQaSZC9soSaxmODsgYnweVaLQ1y6_wCo_uY/exec";
+
+        document.getElementById('inscricaoForm').action = URL_DO_APPS_SCRIPT;
+
+        // Máscara para WhatsApp
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        document.getElementById('inscricaoForm').addEventListener('submit', function() {
+            const btn = document.getElementById('btnEnviar');
+            btn.disabled = true;
+            btn.textContent = "A registrar...";
+
+            setTimeout(function() {
+                document.getElementById('areaFormulario').style.display = 'none';
+                document.getElementById('headerForm').style.display = 'none';
+                document.getElementById('mensagemSucesso').style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = "Registrar Meu Interesse";
+            }, 600);
+        });
+
+        function resetarFormulario() {
+            document.getElementById('inscricaoForm').reset();
+            document.getElementById('mensagemSucesso').style.display = 'none';
+            document.getElementById('headerForm').style.display = 'block';
+            document.getElementById('areaFormulario').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
